@@ -22,6 +22,7 @@ body {
   margin-top: 0;
   margin-bottom: 0;
   line-height: 62px;
+  font-size: 40px;
 }
 
 /* Custom page footer */
@@ -100,10 +101,7 @@ body {
   }
   /* Space out the masthead */
   .header {
-    background-image: url("talis_web_logo.png");
-    background-repeat: no-repeat;
     margin-bottom: 30px;
-    padding-left: 160px;
   }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {

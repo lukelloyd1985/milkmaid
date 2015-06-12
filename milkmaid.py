@@ -1,14 +1,13 @@
 #!/usr/bin/python
 #--------------------------------------   
-# This script reads data from a 
-# MCP3008 ADC device using the SPI bus.
+# This script reads data from a MCP3008 ADC device using the Raspberry Pi SPI bus.
 #
-# Author : Russ Hill (based on code by Matt Hawkins)
-# Date   : 28/05/2014
+# Author : Luke Lloyd (based on code by Russ Hill/Matt Hawkins - https://github.com/talis/gotmilk-hack)
 #
 # Ref :
 #
-# 	http://www.raspberrypi-spy.co.uk/
+# http://www.raspberrypi-spy.co.uk/2013/10/analogue-sensors-on-the-raspberry-pi-using-an-mcp3008/
+# http://engineering.talis.com/articles/hardware-hack-got-milk/
 #
 #--------------------------------------
 
@@ -22,47 +21,10 @@ import subprocess
 import datetime
 import fileinput
 
+version = "v0.1"
+
 config = ConfigParser.ConfigParser()
 config.read([os.path.expanduser("~/gotmilk/.gotmilk"), '/etc/gotmilk'])
-
-AUTH_TOKEN = config.get('HipChat', 'token')
-HIPCHAT_ROOM_ID = config.get('HipChat', 'roomid')
-DELAY = config.getfloat('GotMilk', 'delay')
-
-def internet_on():
-	try:
-		urllib2.urlopen('https://api.hipchat.com', timeout=1)
-		return True
-	except urllib2.URLError as err:
-		return False
-
-def get_ip():
-	cmd = "ifconfig eth0 | awk '/inet addr/ { print $2 } '"
-	process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-	process.wait()
-	return process.stdout.read().split(':')[1]
-
-def send_message(message,color):
-	# send a message via HipChat
-	hipchat_url = "https://api.hipchat.com/v1/rooms/message?format=json&auth_token=" + AUTH_TOKEN
-
-	payload = {
-		'room_id':HIPCHAT_ROOM_ID,
-		'from':'Milkmaid',
-		'color':color,
-		'notify':'true',
-		'message':message
-	}
-
-	r = requests.post(hipchat_url, data=payload)
-
-def wait_for_access():
-	while (internet_on() == False):
-		time.sleep(2)
-	ip_address = get_ip()
-	send_message('Your friendly Talis Milkmaid is up and monitoring on '+ ip_address+' (checking the fridge every '+str(DELAY)+' seconds)','gray')
-
-wait_for_access() 
 
 def write_file(level,message):
 	# write data to local files
