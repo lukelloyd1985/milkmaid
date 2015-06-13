@@ -42,6 +42,7 @@ apt-get install python-dev nagios-nrpe-server
 git clone https://github.com/doceme/py-spidev.git
 cd py-spidev
 python setup.py install
+cd /opt
 git clone git@bitbucket.org:lukelloyd1985/milkmaid.git
 {extra info req}
 ```
