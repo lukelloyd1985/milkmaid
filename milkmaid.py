@@ -48,7 +48,7 @@ def update_html(level_percent_string,date):
 
   newdata = filedata.replace("@level@", level_percent_string + "%")
   newdata = newdata.replace("@date@", date)
-  newdata = newdate.replace("@version@", version)
+  newdata = newdata.replace("@version@", version)
 
   f = open(html_file,'w')
   f.write(newdata)
