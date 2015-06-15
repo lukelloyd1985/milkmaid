@@ -31,7 +31,7 @@ The HTML page is also updated so the milk status can be viewed via the web brosw
 Notes on setting up MilkMaid
 ==========================
 
-You must have Raspian installed...{extra info req}
+You must have Raspian already installed on your Pi. You can get the latest Raspbian image at `http://downloads.raspberrypi.org/raspbian_latest/` but you will also need a program to write the image to an SD card, if you are running Windows you can use Win32DiskImager available here `http://sourceforge.net/projects/win32diskimager/`
 
 **Run the below commands to setup MilkMaid**
 ```
@@ -42,7 +42,10 @@ apt-get install python-dev nagios-nrpe-server
 git clone https://github.com/doceme/py-spidev.git
 cd py-spidev
 python setup.py install
+cd ~
+rm -rf py-spidev/
 cd /opt
 git clone git@bitbucket.org:lukelloyd1985/milkmaid.git
-{extra info req}
 ```
+
+If you want you can setup Apache (outside the scope of this document) to use `/opt/milkmaid/web/` as the directory root and this will allow displaying of the latest milk level from the browser.

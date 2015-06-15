@@ -17,8 +17,12 @@ import urllib2
 import subprocess
 import datetime
 import fileinput
+import sys
 
-version = "v0.5"
+# Global variables
+version = "v0.6"
+now = datetime.datetime.now()
+current_time = now.strftime("%Y-%m-%d %H:%M")
 
 
 def write_file(level,message):
